@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --brand: #0f172a;
+  --brand-accent: #d4af37;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.public-site img,
+.public-site iframe,
+.public-site video {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  outline-offset: 3px;
+}
+
+.container-app {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 1.5rem);
+}
+
+@media (min-width: 768px) {
+  .container-app {
+    padding-inline: 1.5rem;
+  }
+}
+
+.card-surface {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  background: var(--brand);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--foreground);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  border-color: #94a3b8;
+}
+
+.input-text {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: white;
+  padding: 0.75rem 0.875rem;
+  outline: none;
+}
+
+.input-text:focus {
+  border-color: var(--brand);
+}
+
+.prose-public {
+  color: #334155;
+  font-size: clamp(1rem, 1.5vw, 1.05rem);
+  line-height: 1.8;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.prose-public strong {
+  color: #0f172a;
+}
+
+.public-site {
+  overflow-wrap: break-word;
+}
+
+.public-site .card-surface {
+  border-radius: 0.75rem;
+}
+
+.public-site .btn-primary,
+.public-site .btn-secondary {
+  min-height: 2.75rem;
+}
+
+@media (max-width: 640px) {
+  .public-site .btn-primary,
+  .public-site .btn-secondary {
+    width: 100%;
+  }
 }
