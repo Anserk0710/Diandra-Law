@@ -10,6 +10,7 @@ import {
   INITIAL_ACTION_STATE,
   type CmsFormAction,
 } from "@/lib/cms/action-state";
+import { MediaPickerField } from "@/features/media/MediaPickerField";
 
 type CategoryOption = {
   id: string;
@@ -138,7 +139,7 @@ export function ArticleForm({
           htmlFor="excerpt"
           className="text-sm font-semibold"
         >
-          Excerpt
+          Ringkasan artikel (excerpt)
         </label>
 
         <textarea
@@ -157,20 +158,14 @@ export function ArticleForm({
       </div>
 
       <div>
-        <label
-          htmlFor="thumbnail"
-          className="text-sm font-semibold"
-        >
-          Thumbnail
-        </label>
-
-        <input
-          id="thumbnail"
+        <MediaPickerField
           name="thumbnail"
-          maxLength={255}
-          defaultValue={initialData?.thumbnail}
-          className="input-text mt-2"
-          placeholder="/images/article.jpg atau https://..."
+          label="Thumbnail artikel"
+          module="articles"
+          defaultValue={
+            initialData?.thumbnail ?? ""
+          }
+          help="Gunakan gambar horizontal untuk tampilan kartu artikel."
         />
 
         <FieldError
@@ -198,8 +193,8 @@ export function ArticleForm({
         />
 
         <p className="mt-1 text-xs text-slate-500">
-          Gunakan plain text. Rich-text editor
-          belum digunakan pada phase ini.
+          Gunakan teks biasa. Editor teks kaya
+          akan tersedia di pembaruan mendatang.
         </p>
 
         <FieldError
@@ -250,13 +245,13 @@ export function ArticleForm({
             className="input-text mt-2"
           >
             <option value="draft">
-              Draft
+              Draf
             </option>
             <option value="published">
-              Published
+              Dipublikasikan
             </option>
             <option value="archived">
-              Archived
+              Diarsipkan
             </option>
           </select>
 
@@ -278,7 +273,7 @@ export function ArticleForm({
         />
 
         <span className="font-semibold">
-          Featured article
+          Jadikan artikel unggulan
         </span>
       </label>
 

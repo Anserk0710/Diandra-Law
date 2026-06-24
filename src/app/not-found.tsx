@@ -1,14 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+import { buildNotFoundMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildNotFoundMetadata();
 
 export default function NotFound() {
   return (
     <section className="container-app flex min-h-screen items-center justify-center py-20">
       <div className="max-w-xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-700">
+        <p className="text-sm font-black uppercase text-teal-700">
           404
         </p>
 
-        <h1 className="mt-4 text-4xl font-bold">
+        <h1 className="mt-4 text-4xl font-black">
           Halaman tidak ditemukan
         </h1>
 

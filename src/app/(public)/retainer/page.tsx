@@ -1,4 +1,9 @@
 import { notFound } from "next/navigation";
+import {
+  ArrowRight,
+  CheckCircle2,
+  ClipboardCheck,
+} from "lucide-react";
 
 import { CmsActionLink } from "@/components/public/CmsActionLink";
 import { PageHero } from "@/components/public/PageHero";
@@ -102,13 +107,17 @@ export default async function RetainerPage() {
         actions={
           <CmsActionLink
             href={buttonHref}
-            className="rounded-xl bg-amber-400 px-5 py-3 font-bold text-slate-950"
+            className="btn-primary"
           >
             {getString(
               hero,
               "buttonLabel",
               defaults.hero.buttonLabel,
             )}
+            <ArrowRight
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
           </CmsActionLink>
         }
       />
@@ -138,7 +147,7 @@ export default async function RetainerPage() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white py-16 md:py-24">
+      <section className="border-y border-slate-200/80 bg-white/80 py-16 md:py-24">
         <div className="container-app">
           <SectionHeading
             eyebrow={getString(
@@ -158,10 +167,13 @@ export default async function RetainerPage() {
               (item, index) => (
                 <div
                   key={`${item}-${index}`}
-                  className="card-surface flex gap-3 p-5 sm:gap-4 sm:p-6"
+                  className="card-surface interactive-lift flex gap-3 p-5 sm:gap-4 sm:p-6"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 font-bold text-amber-800">
-                    {index + 1}
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="h-5 w-5"
+                    />
                   </span>
 
                   <p className="leading-7">
@@ -193,9 +205,13 @@ export default async function RetainerPage() {
             (item, index) => (
               <div
                 key={`${item}-${index}`}
-                className="card-surface p-6"
+                className="card-surface interactive-lift p-6"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700 sm:text-sm sm:tracking-[0.2em]">
+                <p className="inline-flex items-center gap-1.5 text-xs font-black uppercase text-teal-700 sm:text-sm">
+                  <ClipboardCheck
+                    aria-hidden="true"
+                    className="h-4 w-4"
+                  />
                   Tahap {index + 1}
                 </p>
 

@@ -1,4 +1,8 @@
 import { notFound } from "next/navigation";
+import {
+  ArrowRight,
+  CheckCircle2,
+} from "lucide-react";
 
 import { CmsActionLink } from "@/components/public/CmsActionLink";
 import { PageHero } from "@/components/public/PageHero";
@@ -97,13 +101,17 @@ export default async function AboutPage() {
         actions={
           <CmsActionLink
             href={heroButtonHref}
-            className="rounded-xl bg-amber-400 px-5 py-3 font-bold text-slate-950"
+            className="btn-primary"
           >
             {getString(
               hero,
               "buttonLabel",
               defaults.hero.buttonLabel,
             )}
+            <ArrowRight
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
           </CmsActionLink>
         }
       />
@@ -136,10 +144,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white py-16 md:py-24">
+      <section className="border-y border-slate-200/80 bg-white/80 py-16 md:py-24">
         <div className="container-app grid gap-6 md:grid-cols-2 md:gap-8">
-          <div className="rounded-2xl bg-slate-950 p-6 text-white sm:rounded-3xl sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 sm:text-sm sm:tracking-[0.2em]">
+          <div className="dark-section rounded-lg p-6 text-white shadow-2xl shadow-slate-950/15 sm:p-8">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase text-[var(--brand-accent-soft)] sm:text-sm">
+              <span className="h-px w-8 bg-[var(--brand-accent)]" />
               {getString(
                 vision,
                 "eyebrow",
@@ -147,7 +156,7 @@ export default async function AboutPage() {
               )}
             </p>
 
-            <h2 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl">
+            <h2 className="mt-4 text-2xl font-black leading-tight sm:text-3xl">
               {getString(
                 vision,
                 "title",
@@ -164,8 +173,8 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="card-surface p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700 sm:text-sm sm:tracking-[0.2em]">
+          <div className="card-surface interactive-lift p-6 sm:p-8">
+            <p className="eyebrow-kicker">
               {getString(
                 values,
                 "eyebrow",
@@ -173,7 +182,7 @@ export default async function AboutPage() {
               )}
             </p>
 
-            <h2 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl">
+            <h2 className="mt-4 text-2xl font-black leading-tight sm:text-3xl">
               {getString(
                 values,
                 "title",
@@ -188,8 +197,11 @@ export default async function AboutPage() {
                     key={`${item}-${index}`}
                     className="flex gap-3 sm:gap-4"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 font-bold text-amber-800">
-                      {index + 1}
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+                      <CheckCircle2
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                      />
                     </span>
 
                     <p className="leading-7 text-slate-600">

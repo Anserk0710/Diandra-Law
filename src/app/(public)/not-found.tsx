@@ -4,11 +4,11 @@ export default function PublicNotFound() {
   return (
     <section className="container-app flex min-h-[60vh] items-center justify-center py-20">
       <div className="max-w-xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700 sm:text-sm sm:tracking-[0.2em]">
+        <p className="text-xs font-black uppercase text-teal-700 sm:text-sm">
           404
         </p>
 
-        <h1 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
           Halaman tidak ditemukan
         </h1>
 

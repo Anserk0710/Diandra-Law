@@ -7,8 +7,8 @@ import { requireAdmin } from "@/lib/auth/require-admin";
 
 export const metadata: Metadata = {
   title: {
-    default: "Dashboard Admin",
-    template: "%s | CMS Diandra Law",
+    default: "Beranda Admin",
+    template: "%s | Diandra Law Admin",
   },
   robots: {
     index: false,
@@ -43,7 +43,7 @@ export default async function AdminDashboardLayout({
                 className="block"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                  CMS Admin
+                  Panel Admin
                 </p>
 
                 <h2 className="mt-2 text-xl font-bold text-slate-950">
@@ -79,7 +79,7 @@ export default async function AdminDashboardLayout({
               type="submit"
               className="btn-secondary w-full"
             >
-              Logout
+              Keluar
             </button>
           </form>
         </aside>

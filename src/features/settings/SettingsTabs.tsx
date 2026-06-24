@@ -3,7 +3,7 @@ import { AdminTabs } from "@/components/admin/AdminTabs";
 const settingsTabs = [
   {
     href: "/admin/settings/general",
-    label: "General",
+    label: "Umum",
   },
   {
     href: "/admin/settings/whatsapp",

@@ -109,11 +109,22 @@ export function StatusBadge({
                 ? "bg-amber-100 text-amber-800"
                 : "bg-slate-200 text-slate-700";
 
+    const label =
+        status === "published"
+            ? "Dipublikasikan"
+            : status === "draft"
+                ? "Draf"
+                : status === "inactive"
+                    ? "Tidak Aktif"
+                    : status === "archived"
+                        ? "Diarsipkan"
+                        : status;
+
     return (
         <span
-            className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold capitalize ${className}`}
+            className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${className}`}
         >
-            {status}
+            {label}
         </span>
     );
 }

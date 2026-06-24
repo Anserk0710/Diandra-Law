@@ -8,7 +8,7 @@ import { updateHomePageAction } from "@/features/pages/page.actions";
 import { getHomePageEditorData } from "@/features/pages/page.queries";
 
 export const metadata: Metadata = {
-  title: "Editor Homepage",
+  title: "Editor Beranda",
 };
 
 export default async function AdminHomePageEditor() {
@@ -18,9 +18,9 @@ export default async function AdminHomePageEditor() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Phase 5"
-        title="Editor Homepage"
-        description="Kelola seluruh section utama pada homepage."
+        eyebrow="Kelola Halaman"
+        title="Editor Beranda"
+        description="Kelola seluruh seksi utama pada halaman beranda website."
         action={
           <Link
             href="/"

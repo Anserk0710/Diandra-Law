@@ -6,16 +6,16 @@ import { ServiceForm } from "@/features/services/ServiceForm";
 import { createServiceAction } from "@/features/services/service.actions";
 
 export const metadata: Metadata = {
-  title: "Tambah Service",
+  title: "Tambah Layanan",
 };
 
 export default function CreateServicePage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Services"
-        title="Tambah Service"
-        description="Buat layanan baru beserta FAQ dan CTA."
+        eyebrow="Layanan Hukum"
+        title="Tambah Layanan Baru"
+        description="Buat layanan baru beserta FAQ dan tombol tindakan."
         action={
           <Link
             href="/admin/services"
@@ -28,7 +28,7 @@ export default function CreateServicePage() {
 
       <ServiceForm
         action={createServiceAction}
-        submitLabel="Simpan service"
+        submitLabel="Simpan Layanan"
       />
     </div>
   );

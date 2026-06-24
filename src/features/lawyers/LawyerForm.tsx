@@ -10,6 +10,7 @@ import {
   INITIAL_ACTION_STATE,
   type CmsFormAction,
 } from "@/lib/cms/action-state";
+import { MediaPickerField } from "@/features/media/MediaPickerField";
 
 type LawyerInitialData = {
   name: string;
@@ -56,7 +57,7 @@ export function LawyerForm({
           htmlFor="name"
           className="text-sm font-semibold"
         >
-          Nama lawyer
+          Nama lengkap
         </label>
 
         <input
@@ -94,21 +95,14 @@ export function LawyerForm({
       </div>
 
       <div>
-        <label
-          htmlFor="photo"
-          className="text-sm font-semibold"
-        >
-          Foto
-        </label>
-
-        <input
-          id="photo"
+        <MediaPickerField
           name="photo"
-          type="text"
-          maxLength={255}
-          defaultValue={initialData?.photo}
-          className="input-text mt-2"
-          placeholder="/images/lawyer.jpg atau https://..."
+          label="Foto profil"
+          module="lawyers"
+          defaultValue={
+            initialData?.photo ?? ""
+          }
+          help="Disarankan memakai foto portrait dengan rasio seragam."
         />
 
         <FieldError
@@ -263,13 +257,13 @@ export function LawyerForm({
             className="input-text mt-2"
           >
             <option value="draft">
-              Draft
+              Draf
             </option>
             <option value="published">
-              Published
+              Dipublikasikan
             </option>
             <option value="inactive">
-              Inactive
+              Tidak Aktif
             </option>
           </select>
 
@@ -291,7 +285,7 @@ export function LawyerForm({
         />
 
         <span className="font-semibold">
-          Featured lawyer
+          Jadikan unggulan di halaman tim
         </span>
       </label>
 

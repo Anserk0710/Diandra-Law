@@ -10,6 +10,7 @@ import {
   INITIAL_ACTION_STATE,
   type CmsFormAction,
 } from "@/lib/cms/action-state";
+import { MediaPickerField } from "@/features/media/MediaPickerField";
 
 type ClientInitialData = {
   name: string;
@@ -54,7 +55,7 @@ export function ClientForm({
           htmlFor="name"
           className="text-sm font-semibold"
         >
-          Nama client
+          Nama klien
         </label>
 
         <input
@@ -89,20 +90,14 @@ export function ClientForm({
       </div>
 
       <div>
-        <label
-          htmlFor="logo"
-          className="text-sm font-semibold"
-        >
-          Logo
-        </label>
-
-        <input
-          id="logo"
+        <MediaPickerField
           name="logo"
-          maxLength={255}
-          defaultValue={initialData?.logo}
-          className="input-text mt-2"
-          placeholder="/images/client-logo.png atau https://..."
+          label="Logo klien"
+          module="clients"
+          defaultValue={
+            initialData?.logo ?? ""
+          }
+          help="Gunakan PNG atau WebP transparan bila tersedia."
         />
 
         <FieldError state={state} name="logo" />
@@ -113,7 +108,7 @@ export function ClientForm({
           htmlFor="category"
           className="text-sm font-semibold"
         >
-          Kategori client
+          Kategori klien
         </label>
 
         <input
@@ -202,13 +197,13 @@ export function ClientForm({
             className="input-text mt-2"
           >
             <option value="draft">
-              Draft
+              Draf
             </option>
             <option value="published">
-              Published
+              Dipublikasikan
             </option>
             <option value="inactive">
-              Inactive
+              Tidak Aktif
             </option>
           </select>
 
@@ -230,7 +225,7 @@ export function ClientForm({
         />
 
         <span className="font-semibold">
-          Featured client
+          Jadikan klien unggulan
         </span>
       </label>
 

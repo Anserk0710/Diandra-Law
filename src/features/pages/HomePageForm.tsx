@@ -336,10 +336,10 @@ function ContentSectionFields({
 }: {
   title: string;
   prefix:
-    | "aboutIntro"
-    | "servicesSection"
-    | "lawyersSection"
-    | "articlesSection";
+  | "aboutIntro"
+  | "servicesSection"
+  | "lawyersSection"
+  | "articlesSection";
   data: {
     eyebrow: string;
     title: string;

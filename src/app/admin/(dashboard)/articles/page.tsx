@@ -10,7 +10,7 @@ import { deleteArticleAction } from "@/features/articles/article.actions";
 import { getAdminArticles } from "@/features/articles/article.queries";
 
 export const metadata: Metadata = {
-  title: "Articles",
+  title: "Artikel",
 };
 
 export default async function AdminArticlesPage() {
@@ -19,9 +19,9 @@ export default async function AdminArticlesPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Phase 4"
-        title="Articles"
-        description="Kelola artikel, kategori, publikasi, dan featured content."
+        eyebrow="Kelola Konten"
+        title="Artikel"
+        description="Kelola artikel, kategori, publikasi, dan konten unggulan."
         action={
           <div className="flex gap-2">
             <Link
@@ -35,7 +35,7 @@ export default async function AdminArticlesPage() {
               href="/admin/articles/create"
               className="btn-primary"
             >
-              Tulis artikel
+              Tulis Artikel Baru
             </Link>
           </div>
         }
@@ -44,7 +44,7 @@ export default async function AdminArticlesPage() {
       <section className="card-surface overflow-hidden">
         {articles.length === 0 ? (
           <div className="p-8 text-center">
-            Belum ada artikel.
+            Belum ada artikel yang ditulis.
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -61,10 +61,10 @@ export default async function AdminArticlesPage() {
                     Status
                   </th>
                   <th className="px-5 py-4">
-                    Tanggal
+                    Tanggal Terbit
                   </th>
                   <th className="px-5 py-4 text-right">
-                    Aksi
+                    Tindakan
                   </th>
                 </tr>
               </thead>

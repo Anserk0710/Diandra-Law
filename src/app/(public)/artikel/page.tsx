@@ -4,9 +4,24 @@ import {
 } from "@/components/public/ContentCards";
 import { PageHero } from "@/components/public/PageHero";
 import { getPublishedArticles } from "@/lib/public-site";
+import { buildSeoMetadata } from "@/lib/seo/metadata";
+
+export async function generateMetadata() {
+  return buildSeoMetadata({
+    fallbackTitle:
+      "Artikel dan Publikasi Hukum",
+
+    fallbackDescription:
+      "Wawasan mengenai perusahaan, kontrak, ketenagakerjaan, dan penyelesaian sengketa.",
+
+    path:
+      "/artikel",
+  });
+}
 
 export default async function ArticlesPage() {
-  const articles = await getPublishedArticles();
+  const articles =
+    await getPublishedArticles();
 
   return (
     <>
@@ -19,12 +34,18 @@ export default async function ArticlesPage() {
       <section className="container-app py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {articles.length > 0 ? (
-            articles.map((article) => (
-              <ArticleCard
-                key={article.id.toString()}
-                article={article}
-              />
-            ))
+            articles.map(
+              (article) => (
+                <ArticleCard
+                  key={
+                    article.id.toString()
+                  }
+                  article={
+                    article
+                  }
+                />
+              ),
+            )
           ) : (
             <EmptyState message="Belum ada artikel yang dipublikasikan." />
           )}

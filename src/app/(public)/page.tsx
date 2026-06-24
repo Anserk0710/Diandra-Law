@@ -1,4 +1,9 @@
 import { notFound } from "next/navigation";
+import {
+  ArrowRight,
+  CheckCircle2,
+  MessageCircle,
+} from "lucide-react";
 
 import {
   ArticleCard,
@@ -57,10 +62,7 @@ export default async function HomePage() {
   const content = asObject(page.contentJson);
 
   const hero = getSection(content, "hero");
-  const focus = getSection(
-    content,
-    "focus",
-  );
+  const focus = getSection(content, "focus");
   const aboutIntro = getSection(
     content,
     "aboutIntro",
@@ -82,8 +84,7 @@ export default async function HomePage() {
     "contactCta",
   );
 
-  const defaults =
-    HOME_PAGE_DEFAULTS;
+  const defaults = HOME_PAGE_DEFAULTS;
 
   const focusItems = getStringArray(
     focus,
@@ -95,49 +96,44 @@ export default async function HomePage() {
     settings?.whatsappNumber,
     settings?.whatsappMessage,
   );
-  const primaryCtaHref =
-    resolveCmsLink(
-      getString(
-        hero,
-        "primaryCtaLink",
-        defaults.hero.primaryCtaLink,
-      ),
-      whatsappHref,
-    );
-  const secondaryCtaHref =
-    resolveCmsLink(
-      getString(
-        hero,
-        "secondaryCtaLink",
-        defaults.hero.secondaryCtaLink,
-      ),
-      whatsappHref,
-    );
+  const primaryCtaHref = resolveCmsLink(
+    getString(
+      hero,
+      "primaryCtaLink",
+      defaults.hero.primaryCtaLink,
+    ),
+    whatsappHref,
+  );
+  const secondaryCtaHref = resolveCmsLink(
+    getString(
+      hero,
+      "secondaryCtaLink",
+      defaults.hero.secondaryCtaLink,
+    ),
+    whatsappHref,
+  );
   const heroImageUrl =
     "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?auto=format&fit=crop&fm=jpg&q=80&w=2400";
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-slate-950 text-white">
+      <section className="relative isolate overflow-hidden bg-[var(--brand)] text-white">
         <div
-          className="absolute inset-0 -z-20 bg-cover bg-center"
+          className="absolute inset-0 -z-30 bg-cover bg-center"
           style={{
             backgroundImage: `url("${heroImageUrl}")`,
           }}
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(15,23,42,0.84)_42%,rgba(15,23,42,0.45)_72%,rgba(15,23,42,0.68)_100%)]"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-slate-950 to-transparent"
+          className="absolute inset-0 -z-20 bg-[linear-gradient(95deg,rgba(23,32,46,0.98)_0%,rgba(23,32,46,0.9)_48%,rgba(13,111,104,0.58)_100%)]"
           aria-hidden="true"
         />
 
-        <div className="container-app flex min-h-[calc(100svh-4rem)] flex-col justify-center py-12 sm:py-16 md:min-h-[720px] md:py-24">
-          <div className="max-w-3xl">
-            <p className="inline-flex border-l-4 border-amber-300 bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] text-amber-200 backdrop-blur sm:px-4 sm:tracking-[0.22em]">
+        <div className="container-app flex min-h-[calc(78svh-5rem)] flex-col justify-center py-12 sm:py-16 md:py-20">
+          <div className="reveal-in max-w-4xl">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase text-[var(--brand-accent-soft)] sm:text-sm">
+              <span className="h-px w-8 bg-[var(--brand-accent)]" />
               {getString(
                 hero,
                 "eyebrow",
@@ -145,7 +141,7 @@ export default async function HomePage() {
               )}
             </p>
 
-            <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-6xl md:leading-[1.06]">
+            <h1 className="mt-6 max-w-4xl text-4xl font-black leading-tight sm:text-5xl md:text-6xl">
               {getString(
                 hero,
                 "title",
@@ -164,8 +160,12 @@ export default async function HomePage() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <CmsActionLink
                 href={primaryCtaHref}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-amber-400 px-5 py-3 font-bold text-slate-950 hover:bg-amber-300"
+                className="btn-primary"
               >
+                <MessageCircle
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                />
                 {getString(
                   hero,
                   "primaryCtaLabel",
@@ -175,47 +175,62 @@ export default async function HomePage() {
 
               <CmsActionLink
                 href={secondaryCtaHref}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-600 px-5 py-3 font-bold text-white hover:bg-white/5"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/10 px-5 py-3 font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15"
               >
                 {getString(
                   hero,
                   "secondaryCtaLabel",
                   defaults.hero.secondaryCtaLabel,
                 )}
+                <ArrowRight
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                />
               </CmsActionLink>
             </div>
           </div>
 
-          <div className="mt-10 border-y border-white/15 bg-slate-950/35 py-6 backdrop-blur sm:mt-14 sm:py-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 sm:text-sm sm:tracking-[0.2em]">
-              {getString(
-                focus,
-                "eyebrow",
-                defaults.focus.eyebrow,
-              )}
-            </p>
+        </div>
+      </section>
 
-            <h2 className="mt-3 text-xl font-bold sm:text-2xl">
-              {getString(
-                focus,
-                "title",
-                defaults.focus.title,
-              )}
-            </h2>
+      <section className="border-y border-slate-200/80 bg-white py-10 md:py-12">
+        <div className="container-app">
+          <div className="grid gap-4 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+            <div>
+              <p className="eyebrow-kicker">
+                {getString(
+                  focus,
+                  "eyebrow",
+                  defaults.focus.eyebrow,
+                )}
+              </p>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <h2 className="mt-2 text-xl font-black leading-tight text-slate-950 sm:text-2xl">
+                {getString(
+                  focus,
+                  "title",
+                  defaults.focus.title,
+                )}
+              </h2>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
               {focusItems.map((item, index) => (
                 <div
                   key={`${item}-${index}`}
-                  className="flex items-start gap-3 rounded-xl border border-white/10 bg-slate-900/60 p-4 sm:gap-4"
+                  className="card-surface interactive-lift p-4"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-400 font-bold text-slate-950">
-                    {index + 1}
-                  </span>
-
-                  <p className="leading-7 text-slate-200">
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+                      <CheckCircle2
+                        aria-hidden="true"
+                        className="h-4 w-4"
+                      />
+                    </span>
+                    <p className="leading-7 text-slate-700">
                     {item}
                   </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -224,7 +239,7 @@ export default async function HomePage() {
       </section>
 
       <section className="container-app py-16 md:py-24">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionHeading
             eyebrow={getString(
               aboutIntro,
@@ -247,6 +262,27 @@ export default async function HomePage() {
               )}
             </p>
 
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              {[
+                "Analisis terarah",
+                "Respons transparan",
+                "Dokumen rapi",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="card-surface interactive-lift p-4"
+                >
+                  <p className="flex items-center gap-2 text-sm font-black text-slate-950">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="h-4 w-4 text-teal-700"
+                    />
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+
             <CmsActionLink
               href={resolveCmsLink(
                 getString(
@@ -256,19 +292,23 @@ export default async function HomePage() {
                 ),
                 whatsappHref,
               )}
-              className="btn-secondary mt-6"
+              className="btn-secondary mt-7"
             >
               {getString(
                 aboutIntro,
                 "buttonLabel",
                 defaults.aboutIntro.buttonLabel,
               )}
+              <ArrowRight
+                aria-hidden="true"
+                className="h-4 w-4"
+              />
             </CmsActionLink>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white py-16 md:py-24">
+      <section className="border-y border-slate-200/80 bg-white/80 py-16 md:py-24">
         <div className="container-app">
           <SectionHeading
             eyebrow={getString(
@@ -317,6 +357,10 @@ export default async function HomePage() {
               "buttonLabel",
               defaults.servicesSection.buttonLabel,
             )}
+            <ArrowRight
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
           </CmsActionLink>
         </div>
       </section>
@@ -369,10 +413,14 @@ export default async function HomePage() {
             "buttonLabel",
             defaults.lawyersSection.buttonLabel,
           )}
+          <ArrowRight
+            aria-hidden="true"
+            className="h-4 w-4"
+          />
         </CmsActionLink>
       </section>
 
-      <section className="border-y border-slate-200 bg-white py-16 md:py-24">
+      <section className="border-y border-slate-200/80 bg-white/80 py-16 md:py-24">
         <div className="container-app">
           <SectionHeading
             eyebrow={getString(
@@ -421,14 +469,19 @@ export default async function HomePage() {
               "buttonLabel",
               defaults.articlesSection.buttonLabel,
             )}
+            <ArrowRight
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
           </CmsActionLink>
         </div>
       </section>
 
       <section className="container-app py-16 md:py-24">
-        <div className="grid overflow-hidden rounded-2xl bg-slate-950 text-white sm:rounded-3xl lg:grid-cols-2">
+        <div className="dark-section grid overflow-hidden rounded-lg text-white shadow-2xl shadow-slate-950/20 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="p-6 sm:p-8 md:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 sm:text-sm sm:tracking-[0.2em]">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase text-[var(--brand-accent-soft)] sm:text-sm">
+              <span className="h-px w-8 bg-[var(--brand-accent)]" />
               {getString(
                 contactCta,
                 "eyebrow",
@@ -436,7 +489,7 @@ export default async function HomePage() {
               )}
             </p>
 
-            <h2 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl md:text-4xl">
+            <h2 className="mt-4 text-2xl font-black leading-tight sm:text-3xl md:text-4xl">
               {getString(
                 contactCta,
                 "title",
@@ -444,7 +497,7 @@ export default async function HomePage() {
               )}
             </h2>
 
-            <p className="mt-4 leading-8 text-slate-300">
+            <p className="mt-4 leading-8 text-slate-200">
               {getString(
                 contactCta,
                 "description",
@@ -461,8 +514,12 @@ export default async function HomePage() {
                 ),
                 whatsappHref,
               )}
-              className="mt-7 inline-flex rounded-xl bg-amber-400 px-5 py-3 font-bold text-slate-950"
+              className="btn-primary mt-7"
             >
+              <MessageCircle
+                aria-hidden="true"
+                className="h-4 w-4"
+              />
               {getString(
                 contactCta,
                 "buttonLabel",
@@ -471,7 +528,7 @@ export default async function HomePage() {
             </CmsActionLink>
           </div>
 
-          <div className="min-h-72 bg-slate-200 sm:min-h-80">
+          <div className="min-h-72 bg-slate-200 md:min-h-96">
             {settings?.mapEmbedUrl ? (
               <iframe
                 src={settings.mapEmbedUrl}
@@ -480,13 +537,13 @@ export default async function HomePage() {
                   "mapTitle",
                   defaults.contactCta.mapTitle,
                 )}
-                className="h-full min-h-80 w-full border-0"
+                className="h-full min-h-80 w-full border-0 md:min-h-96"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
             ) : (
-              <div className="flex min-h-80 items-center justify-center text-slate-600">
+              <div className="flex min-h-80 items-center justify-center px-5 text-center text-slate-600 md:min-h-96">
                 {getString(
                   contactCta,
                   "mapEmptyMessage",

@@ -10,6 +10,7 @@ import {
   INITIAL_ACTION_STATE,
   type CmsFormAction,
 } from "@/lib/cms/action-state";
+import { MediaPickerField } from "@/features/media/MediaPickerField";
 
 type Props = {
   action: CmsFormAction;
@@ -54,9 +55,8 @@ export function SeoSettingsForm({
           </h2>
 
           <p className="mt-1 text-sm text-slate-600">
-            Metadata ini menjadi fallback
-            sebelum metadata per halaman dibuat
-            pada Phase 7.
+            Metadata ini menjadi cadangan
+            sebelum metadata per halaman diatur.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export function SeoSettingsForm({
             htmlFor="metaTitle"
             className="text-sm font-semibold"
           >
-            Meta title
+            Judul SEO (meta title)
           </label>
 
           <input
@@ -89,7 +89,7 @@ export function SeoSettingsForm({
             htmlFor="metaDescription"
             className="text-sm font-semibold"
           >
-            Meta description
+            Deskripsi SEO (meta description)
           </label>
 
           <textarea
@@ -135,21 +135,14 @@ export function SeoSettingsForm({
         </div>
 
         <div>
-          <label
-            htmlFor="ogImage"
-            className="text-sm font-semibold"
-          >
-            Default OG image
-          </label>
-
-          <input
-            id="ogImage"
+          <MediaPickerField
             name="ogImage"
+            label="Default OG image"
+            module="seo"
             defaultValue={
               initialData.ogImage
             }
-            className="input-text mt-2"
-            placeholder="/images/og-default.jpg"
+            help="Image default ketika halaman dibagikan ke media sosial."
           />
 
           <FieldError
@@ -164,7 +157,7 @@ export function SeoSettingsForm({
               htmlFor="robots"
               className="text-sm font-semibold"
             >
-              Robots
+              Pengindeksan mesin pencari
             </label>
 
             <select
@@ -176,16 +169,16 @@ export function SeoSettingsForm({
               className="input-text mt-2"
             >
               <option value="index,follow">
-                Index, follow
+                Diindeks & diikuti
               </option>
               <option value="index,nofollow">
-                Index, nofollow
+                Diindeks, tautan tidak diikuti
               </option>
               <option value="noindex,follow">
-                Noindex, follow
+                Tidak diindeks, tautan diikuti
               </option>
               <option value="noindex,nofollow">
-                Noindex, nofollow
+                Tidak diindeks & tidak diikuti
               </option>
             </select>
 
@@ -230,9 +223,8 @@ export function SeoSettingsForm({
         </div>
 
         <p className="text-xs text-slate-500">
-          Nilai schema disimpan sekarang.
-          Pembuatan JSON-LD dilakukan pada
-          Phase 7.
+          Pengaturan skema disimpan.
+          Data terstruktur JSON-LD akan aktif secara otomatis.
         </p>
       </section>
 
@@ -244,7 +236,7 @@ export function SeoSettingsForm({
         >
           {pending
             ? "Menyimpan..."
-            : "Simpan SEO"}
+            : "Simpan Pengaturan SEO"}
         </button>
       </div>
     </form>

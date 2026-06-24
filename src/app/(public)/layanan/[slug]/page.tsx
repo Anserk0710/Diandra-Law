@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  HelpCircle,
+  MessageCircle,
+} from "lucide-react";
 import { PageHero } from "@/components/public/PageHero";
 import {
   getPublishedServiceBySlug,
@@ -53,7 +57,7 @@ export default async function ServiceDetailPage({
 
   return (
     <>
-      <PageHero
+      <PageHero compact
         eyebrow="Detail Layanan"
         title={service.title}
         description={service.summary}
@@ -62,8 +66,12 @@ export default async function ServiceDetailPage({
             href={whatsappHref}
             target="_blank"
             rel="noreferrer"
-            className="rounded-xl bg-amber-400 px-5 py-3 font-bold text-slate-950"
+            className="btn-primary"
           >
+            <MessageCircle
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
             Konsultasikan Layanan Ini
           </a>
         }
@@ -77,11 +85,11 @@ export default async function ServiceDetailPage({
               <img
                 src={service.coverImage}
                 alt={service.title}
-                className="mb-8 max-h-[520px] w-full rounded-2xl object-cover sm:mb-10 sm:rounded-3xl"
+                className="mb-8 max-h-[520px] w-full rounded-lg object-cover shadow-2xl shadow-slate-950/10 sm:mb-10"
               />
             ) : null}
 
-            <h2 className="text-2xl font-bold leading-tight sm:text-3xl">
+            <h2 className="text-2xl font-black leading-tight sm:text-3xl">
               Tentang layanan
             </h2>
 
@@ -91,7 +99,7 @@ export default async function ServiceDetailPage({
 
             {service.faqs.length > 0 ? (
               <section className="mt-14">
-                <h2 className="text-2xl font-bold leading-tight sm:text-3xl">
+                <h2 className="text-2xl font-black leading-tight sm:text-3xl">
                   Pertanyaan yang sering diajukan
                 </h2>
 
@@ -99,9 +107,13 @@ export default async function ServiceDetailPage({
                   {service.faqs.map((faq) => (
                     <details
                       key={faq.id.toString()}
-                      className="card-surface p-5"
+                      className="card-surface interactive-lift p-5"
                     >
-                      <summary className="cursor-pointer font-semibold">
+                      <summary className="cursor-pointer font-bold text-slate-950">
+                        <HelpCircle
+                          aria-hidden="true"
+                          className="mr-2 inline h-4 w-4 text-teal-700"
+                        />
                         {faq.question}
                       </summary>
 
@@ -117,11 +129,11 @@ export default async function ServiceDetailPage({
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="card-surface p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700 sm:text-sm sm:tracking-[0.2em]">
+              <p className="eyebrow-kicker">
                 Langkah Berikutnya
               </p>
 
-              <h2 className="mt-3 text-2xl font-bold">
+              <h2 className="mt-3 text-2xl font-black">
                 Diskusikan kebutuhan Anda
               </h2>
 
@@ -151,6 +163,12 @@ export default async function ServiceDetailPage({
                         rel="noreferrer"
                         className={className}
                       >
+                        {cta.type === "whatsapp" ? (
+                          <MessageCircle
+                            aria-hidden="true"
+                            className="h-4 w-4"
+                          />
+                        ) : null}
                         {cta.label}
                       </a>
                     ) : (
@@ -159,6 +177,12 @@ export default async function ServiceDetailPage({
                         href={href}
                         className={className}
                       >
+                        {cta.type === "whatsapp" ? (
+                          <MessageCircle
+                            aria-hidden="true"
+                            className="h-4 w-4"
+                          />
+                        ) : null}
                         {cta.label}
                       </Link>
                     );
@@ -170,6 +194,10 @@ export default async function ServiceDetailPage({
                     rel="noreferrer"
                     className="btn-primary w-full"
                   >
+                    <MessageCircle
+                      aria-hidden="true"
+                      className="h-4 w-4"
+                    />
                     Konsultasi WhatsApp
                   </a>
                 )}

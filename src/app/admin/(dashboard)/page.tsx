@@ -11,26 +11,26 @@ export const metadata: Metadata = {
 const moduleCards = [
   {
     key: "services",
-    label: "Services",
+    label: "Layanan Hukum",
     description: "Layanan hukum yang tersedia.",
     href: "/admin/services",
   },
   {
     key: "lawyers",
-    label: "Lawyers",
+    label: "Tim Lawyer",
     description: "Profil tim dan lawyer.",
     href: "/admin/lawyers",
   },
   {
     key: "articles",
-    label: "Articles",
+    label: "Artikel",
     description: "Artikel dan publikasi.",
     href: "/admin/articles",
   },
   {
     key: "clients",
-    label: "Clients",
-    description: "Daftar client atau testimoni.",
+    label: "Daftar Klien",
+    description: "Daftar klien atau testimoni.",
     href: "/admin/clients",
   },
 ] as const;
@@ -38,27 +38,27 @@ const moduleCards = [
 const quickActions = [
   {
     href: "/admin/services/create",
-    label: "Tambah service",
+    label: "Tambah layanan",
   },
   {
     href: "/admin/lawyers/create",
-    label: "Tambah lawyer",
+    label: "Tambah anggota tim",
   },
   {
     href: "/admin/articles/create",
-    label: "Tulis artikel",
+    label: "Tulis artikel baru",
   },
   {
     href: "/admin/clients/create",
-    label: "Tambah client",
+    label: "Tambah klien",
   },
   {
     href: "/admin/settings/general",
-    label: "Buka settings",
+    label: "Buka pengaturan",
   },
   {
     href: "/admin/media",
-    label: "Buka media",
+    label: "Koleksi media",
   },
 ];
 
@@ -88,7 +88,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-6 md:space-y-8">
       <section className="card-surface p-6 md:p-8">
         <p className="text-sm font-semibold text-amber-700">
-          Dashboard
+          Beranda Admin
         </p>
 
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">
@@ -98,7 +98,7 @@ export default async function AdminDashboardPage() {
 
         <p className="mt-3 max-w-2xl text-slate-600">
           Pantau ringkasan konten dan gunakan
-          shortcut untuk menuju modul CMS.
+          akses cepat untuk menuju modul yang dibutuhkan.
         </p>
       </section>
 
@@ -112,7 +112,7 @@ export default async function AdminDashboardPage() {
             id="content-summary-heading"
             className="text-xl font-bold text-slate-950"
           >
-            Konten CMS
+            Konten Website
           </h2>
         </div>
 
@@ -158,11 +158,11 @@ export default async function AdminDashboardPage() {
           id="quick-actions-heading"
           className="text-xl font-bold text-slate-950"
         >
-          Shortcut
+          Akses Cepat
         </h2>
 
         <p className="mt-1 text-sm text-slate-600">
-          Akses cepat menuju modul CMS.
+          Langsung menuju bagian yang ingin dikelola.
         </p>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">

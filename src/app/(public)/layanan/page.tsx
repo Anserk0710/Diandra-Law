@@ -4,9 +4,24 @@ import {
 } from "@/components/public/ContentCards";
 import { PageHero } from "@/components/public/PageHero";
 import { getPublishedServices } from "@/lib/public-site";
+import { buildSeoMetadata } from "@/lib/seo/metadata";
+
+export async function generateMetadata() {
+  return buildSeoMetadata({
+    fallbackTitle:
+      "Layanan Hukum",
+
+    fallbackDescription:
+      "Solusi dan pendampingan hukum untuk kebutuhan bisnis maupun individu.",
+
+    path:
+      "/layanan",
+  });
+}
 
 export default async function ServicesPage() {
-  const services = await getPublishedServices();
+  const services =
+    await getPublishedServices();
 
   return (
     <>
@@ -19,12 +34,18 @@ export default async function ServicesPage() {
       <section className="container-app py-16 md:py-24">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {services.length > 0 ? (
-            services.map((service) => (
-              <ServiceCard
-                key={service.id.toString()}
-                service={service}
-              />
-            ))
+            services.map(
+              (service) => (
+                <ServiceCard
+                  key={
+                    service.id.toString()
+                  }
+                  service={
+                    service
+                  }
+                />
+              ),
+            )
           ) : (
             <EmptyState message="Belum ada layanan yang dipublikasikan." />
           )}

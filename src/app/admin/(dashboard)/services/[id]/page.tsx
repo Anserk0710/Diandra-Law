@@ -9,7 +9,7 @@ import { getAdminServiceById } from "@/features/services/service.queries";
 import { parseEntityId } from "@/lib/cms/cms-utils";
 
 export const metadata: Metadata = {
-  title: "Edit Service",
+  title: "Edit Layanan",
 };
 
 type EditServicePageProps = {
@@ -44,9 +44,9 @@ export default async function EditServicePage({
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Services"
+        eyebrow="Layanan Hukum"
         title={`Edit: ${service.title}`}
-        description="Perubahan published akan diterapkan pada website publik."
+        description="Perubahan yang dipublikasikan akan langsung diterapkan ke website."
         action={
           <div className="flex gap-2">
             {service.status ===

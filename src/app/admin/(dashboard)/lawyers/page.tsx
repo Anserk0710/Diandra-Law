@@ -10,7 +10,7 @@ import { deleteLawyerAction } from "@/features/lawyers/lawyer.actions";
 import { getAdminLawyers } from "@/features/lawyers/lawyer.queries";
 
 export const metadata: Metadata = {
-  title: "Lawyers",
+  title: "Tim Lawyer",
 };
 
 export default async function AdminLawyersPage() {
@@ -19,15 +19,15 @@ export default async function AdminLawyersPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Phase 4"
-        title="Lawyers"
-        description="Kelola profil lawyer, publikasi, featured, dan urutan tampil."
+        eyebrow="Kelola Konten"
+        title="Tim Lawyer"
+        description="Kelola profil anggota tim, publikasi, unggulan, dan urutan tampil."
         action={
           <Link
             href="/admin/lawyers/create"
             className="btn-primary"
           >
-            Tambah lawyer
+            Tambah Anggota Tim
           </Link>
         }
       />
@@ -35,7 +35,7 @@ export default async function AdminLawyersPage() {
       <section className="card-surface overflow-hidden">
         {lawyers.length === 0 ? (
           <div className="p-8 text-center">
-            Belum ada lawyer.
+            Belum ada anggota tim yang ditambahkan.
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -43,7 +43,7 @@ export default async function AdminLawyersPage() {
               <thead className="border-b bg-slate-50">
                 <tr>
                   <th className="px-5 py-4">
-                    Lawyer
+                    Anggota Tim
                   </th>
                   <th className="px-5 py-4">
                     Spesialisasi
@@ -55,7 +55,7 @@ export default async function AdminLawyersPage() {
                     Urutan
                   </th>
                   <th className="px-5 py-4 text-right">
-                    Aksi
+                    Tindakan
                   </th>
                 </tr>
               </thead>
@@ -113,7 +113,7 @@ export default async function AdminLawyersPage() {
                           )}
                         >
                           <ConfirmSubmitButton
-                            confirmationMessage={`Hapus lawyer "${lawyer.name}"?`}
+                            confirmationMessage={`Hapus profil "${lawyer.name}"?`}
                           />
                         </form>
                       </div>

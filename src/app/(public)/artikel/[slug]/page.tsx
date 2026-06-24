@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPublishedArticleBySlug } from "@/lib/public-site";
 import {
-  formatIndonesianDate,
-  getInitials,
-} from "@/lib/site-utils";
+  ArrowLeft,
+  MessageCircle,
+  Newspaper,
+  Scale,
+} from "lucide-react";
+import { getPublishedArticleBySlug } from "@/lib/public-site";
+import { formatIndonesianDate } from "@/lib/site-utils";
 
 type ArticleDetailPageProps = {
   params: Promise<{
@@ -26,21 +29,29 @@ export default async function ArticleDetailPage({
 
   return (
     <article>
-      <header className="border-b border-slate-200 bg-white">
+      <header className="dark-section border-b border-white/10 text-white">
         <div className="container-app py-12 sm:py-16 md:py-20">
           <Link
             href="/artikel"
-            className="text-sm font-semibold text-amber-700"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[var(--brand-accent-soft)] transition hover:text-white"
           >
-            ← Kembali ke artikel
+            <ArrowLeft
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
+            Kembali ke artikel
           </Link>
 
-          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-slate-500">
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-slate-300">
+            <Newspaper
+              aria-hidden="true"
+              className="h-4 w-4 text-[var(--brand-accent-soft)]"
+            />
             <span>
               {article.category?.name ?? "Umum"}
             </span>
 
-            <span aria-hidden="true">•</span>
+            <span aria-hidden="true">&middot;</span>
 
             <time>
               {formatIndonesianDate(
@@ -49,12 +60,12 @@ export default async function ArticleDetailPage({
             </time>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
+          <h1 className="mt-4 max-w-4xl text-3xl font-black leading-tight sm:text-4xl md:text-5xl">
             {article.title}
           </h1>
 
           {article.excerpt ? (
-            <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+            <p className="mt-6 max-w-3xl text-base leading-7 text-slate-200 sm:text-lg sm:leading-8">
               {article.excerpt}
             </p>
           ) : null}
@@ -68,11 +79,15 @@ export default async function ArticleDetailPage({
             <img
               src={article.thumbnail}
               alt={article.title}
-              className="mb-8 max-h-[520px] w-full rounded-2xl object-cover sm:mb-12 sm:rounded-3xl"
+              className="mb-8 max-h-[520px] w-full rounded-lg object-cover shadow-2xl shadow-slate-950/10 sm:mb-12"
             />
           ) : (
-            <div className="mb-8 flex h-56 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-800 to-slate-950 text-4xl font-bold text-amber-300 sm:mb-12 sm:h-72 sm:rounded-3xl sm:text-5xl">
-              {getInitials(article.title)}
+            <div className="mb-8 flex h-56 items-center justify-center rounded-lg bg-[var(--brand)] text-white shadow-2xl shadow-slate-950/10 sm:mb-12 sm:h-72">
+              <Scale
+                aria-hidden="true"
+                className="h-12 w-12 text-[var(--brand-accent-soft)]"
+                strokeWidth={1.8}
+              />
             </div>
           )}
 
@@ -85,6 +100,10 @@ export default async function ArticleDetailPage({
               href="/kontak"
               className="btn-primary"
             >
+              <MessageCircle
+                aria-hidden="true"
+                className="h-4 w-4"
+              />
               Konsultasikan Topik Ini
             </Link>
           </div>

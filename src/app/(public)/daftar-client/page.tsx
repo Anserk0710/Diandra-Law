@@ -38,7 +38,7 @@ export default async function ClientsPage() {
             {Object.entries(groupedClients).map(
               ([category, items]) => (
                 <section key={category}>
-                  <h2 className="text-2xl font-bold">
+                  <h2 className="text-2xl font-black">
                     {category}
                   </h2>
 

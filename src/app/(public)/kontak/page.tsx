@@ -1,4 +1,11 @@
 import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
+import {
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 
 import { PageHero } from "@/components/public/PageHero";
 import { CONTACT_PAGE_DEFAULTS } from "@/features/pages/page.types";
@@ -73,7 +80,7 @@ export default async function ContactPage() {
       <section className="container-app py-16 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-700 sm:text-sm sm:tracking-[0.2em]">
+            <p className="eyebrow-kicker">
               {getString(
                 officeInfo,
                 "eyebrow",
@@ -82,7 +89,7 @@ export default async function ContactPage() {
               )}
             </p>
 
-            <h2 className="mt-3 text-2xl font-bold leading-tight sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-black leading-tight sm:text-3xl">
               {getString(
                 officeInfo,
                 "title",
@@ -101,6 +108,12 @@ export default async function ContactPage() {
 
             <div className="mt-8 grid gap-4">
               <ContactCard
+                icon={
+                  <MapPin
+                    aria-hidden="true"
+                    className="h-5 w-5"
+                  />
+                }
                 label={getString(
                   officeInfo,
                   "addressLabel",
@@ -114,6 +127,12 @@ export default async function ContactPage() {
               />
 
               <ContactCard
+                icon={
+                  <Phone
+                    aria-hidden="true"
+                    className="h-5 w-5"
+                  />
+                }
                 label={getString(
                   officeInfo,
                   "phoneLabel",
@@ -127,6 +146,12 @@ export default async function ContactPage() {
               />
 
               <ContactCard
+                icon={
+                  <Mail
+                    aria-hidden="true"
+                    className="h-5 w-5"
+                  />
+                }
                 label={getString(
                   officeInfo,
                   "emailLabel",
@@ -158,6 +183,10 @@ export default async function ContactPage() {
               }
               className="btn-primary mt-6"
             >
+              <MessageCircle
+                aria-hidden="true"
+                className="h-4 w-4"
+              />
               {getString(
                 officeInfo,
                 "whatsappButtonLabel",
@@ -167,7 +196,7 @@ export default async function ContactPage() {
             </a>
           </div>
 
-          <div className="min-h-80 overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:rounded-3xl md:min-h-[520px]">
+          <div className="min-h-80 overflow-hidden rounded-lg border border-slate-200 bg-slate-200 shadow-2xl shadow-slate-950/10 md:min-h-[520px]">
             {settings?.mapEmbedUrl ? (
               <iframe
                 src={settings.mapEmbedUrl}
@@ -198,21 +227,30 @@ export default async function ContactPage() {
 }
 
 function ContactCard({
+  icon,
   label,
   value,
 }: {
+  icon: ReactNode;
   label: string;
   value: string;
 }) {
   return (
-    <div className="card-surface p-5">
-      <p className="text-sm text-slate-500">
-        {label}
-      </p>
+    <div className="card-surface interactive-lift p-5">
+      <div className="flex items-start gap-4">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+          {icon}
+        </span>
+        <div>
+          <p className="text-sm text-slate-500">
+            {label}
+          </p>
 
-      <p className="mt-2 whitespace-pre-line break-words font-semibold leading-7">
-        {value}
-      </p>
+          <p className="mt-2 whitespace-pre-line break-words font-semibold leading-7">
+            {value}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

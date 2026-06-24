@@ -10,7 +10,7 @@ import { deleteServiceAction } from "@/features/services/service.actions";
 import { getAdminServices } from "@/features/services/service.queries";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Layanan Hukum",
 };
 
 export default async function AdminServicesPage() {
@@ -19,15 +19,15 @@ export default async function AdminServicesPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Phase 4"
-        title="Services"
-        description="Kelola layanan, FAQ, CTA, status, featured, dan urutan tampil."
+        eyebrow="Kelola Konten"
+        title="Layanan Hukum"
+        description="Kelola layanan, FAQ, tombol aksi, status, unggulan, dan urutan tampil."
         action={
           <Link
             href="/admin/services/create"
             className="btn-primary"
           >
-            Tambah service
+            Tambah Layanan
           </Link>
         }
       />
@@ -35,7 +35,7 @@ export default async function AdminServicesPage() {
       <section className="card-surface overflow-hidden">
         {services.length === 0 ? (
           <div className="p-8 text-center">
-            Belum ada service.
+            Belum ada layanan yang ditambahkan.
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -43,7 +43,7 @@ export default async function AdminServicesPage() {
               <thead className="border-b bg-slate-50">
                 <tr>
                   <th className="px-5 py-4">
-                    Service
+                    Layanan
                   </th>
                   <th className="px-5 py-4">
                     Status
@@ -55,7 +55,7 @@ export default async function AdminServicesPage() {
                     Urutan
                   </th>
                   <th className="px-5 py-4 text-right">
-                    Aksi
+                    Tindakan
                   </th>
                 </tr>
               </thead>
@@ -110,7 +110,7 @@ export default async function AdminServicesPage() {
                           )}
                         >
                           <ConfirmSubmitButton
-                            confirmationMessage={`Hapus service "${service.title}"?`}
+                            confirmationMessage={`Hapus layanan "${service.title}"?`}
                           />
                         </form>
                       </div>

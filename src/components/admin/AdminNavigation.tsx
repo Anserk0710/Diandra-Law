@@ -6,38 +6,38 @@ import { usePathname } from "next/navigation";
 const navItems = [
   {
     href: "/admin",
-    label: "Dashboard",
+    label: "Beranda",
     exact: true,
   },
   {
     href: "/admin/services",
-    label: "Services",
+    label: "Layanan",
   },
   {
     href: "/admin/lawyers",
-    label: "Lawyers",
+    label: "Tim Lawyer",
   },
   {
     href: "/admin/articles",
-    label: "Articles",
+    label: "Artikel",
   },
   {
     href: "/admin/clients",
-    label: "Clients",
+    label: "Klien",
   },
   {
     href: "/admin/pages/home",
-    label: "Pages",
+    label: "Halaman",
     activePrefix: "/admin/pages",
   },
   {
     href: "/admin/settings/general",
-    label: "Settings",
+    label: "Pengaturan",
     activePrefix: "/admin/settings",
   },
   {
     href: "/admin/media",
-    label: "Media",
+    label: "Koleksi Media",
   },
 ];
 
@@ -46,7 +46,7 @@ export function AdminNavigation() {
 
   return (
     <nav
-      aria-label="Navigasi CMS"
+      aria-label="Menu navigasi admin"
       className="space-y-1"
     >
       {navItems.map((item) => {

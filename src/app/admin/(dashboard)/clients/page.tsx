@@ -10,7 +10,7 @@ import { deleteClientAction } from "@/features/clients/client.actions";
 import { getAdminClients } from "@/features/clients/client.queries";
 
 export const metadata: Metadata = {
-  title: "Clients",
+  title: "Daftar Klien",
 };
 
 export default async function AdminClientsPage() {
@@ -19,15 +19,15 @@ export default async function AdminClientsPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Phase 4"
-        title="Clients/Testimoni"
-        description="Kelola daftar client, kategori, deskripsi, status, dan urutan."
+        eyebrow="Kelola Konten"
+        title="Daftar Klien"
+        description="Kelola daftar klien, kategori, deskripsi, status, dan urutan tampil."
         action={
           <Link
             href="/admin/clients/create"
             className="btn-primary"
           >
-            Tambah client
+            Tambah Klien
           </Link>
         }
       />
@@ -35,7 +35,7 @@ export default async function AdminClientsPage() {
       <section className="card-surface overflow-hidden">
         {clients.length === 0 ? (
           <div className="p-8 text-center">
-            Belum ada client.
+            Belum ada klien yang ditambahkan.
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -43,7 +43,7 @@ export default async function AdminClientsPage() {
               <thead className="border-b bg-slate-50">
                 <tr>
                   <th className="px-5 py-4">
-                    Client
+                    Klien
                   </th>
                   <th className="px-5 py-4">
                     Kategori
@@ -55,7 +55,7 @@ export default async function AdminClientsPage() {
                     Urutan
                   </th>
                   <th className="px-5 py-4 text-right">
-                    Aksi
+                    Tindakan
                   </th>
                 </tr>
               </thead>
@@ -105,7 +105,7 @@ export default async function AdminClientsPage() {
                           )}
                         >
                           <ConfirmSubmitButton
-                            confirmationMessage={`Hapus client "${client.name}"?`}
+                            confirmationMessage={`Hapus klien "${client.name}"?`}
                           />
                         </form>
                       </div>

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { Scale } from "lucide-react";
 
 type BrandLogoProps = {
   src?: string | null;
@@ -16,33 +17,34 @@ export function BrandLogo({
       <img
         src={src}
         alt={`${siteName} logo`}
-        className="h-10 max-w-40 object-contain"
+        className="h-[3.75rem] max-w-48 object-contain"
       />
     );
   }
 
-  const initials = siteName
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) =>
-      part.charAt(0).toUpperCase(),
-    )
-    .join("");
-
   return (
     <span
-      className="flex h-10 w-10 items-center justify-center rounded-xl font-bold"
+      className="flex h-[3.75rem] w-[3.75rem] items-center justify-center rounded-2xl border shadow-sm"
       style={{
         backgroundColor:
           variant === "dark"
-            ? "var(--brand)"
-            : "white",
+            ? "#ffffff"
+            : "rgba(255, 255, 255, 0.08)",
         color:
-          "var(--brand-accent)",
+          variant === "dark"
+            ? "var(--brand)"
+            : "#f3d7a6",
+        borderColor:
+          variant === "dark"
+            ? "rgba(23, 32, 46, 0.14)"
+            : "rgba(255, 255, 255, 0.16)",
       }}
     >
-      {initials || "DL"}
+      <Scale
+        aria-hidden="true"
+        className="h-8 w-8"
+        strokeWidth={2.2}
+      />
     </span>
   );
 }

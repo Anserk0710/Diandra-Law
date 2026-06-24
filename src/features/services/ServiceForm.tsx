@@ -14,6 +14,7 @@ import {
   INITIAL_ACTION_STATE,
   type CmsFormAction,
 } from "@/lib/cms/action-state";
+import { MediaPickerField } from "@/features/media/MediaPickerField";
 
 type ServiceFormValues = {
   title: string;
@@ -131,7 +132,7 @@ export function ServiceForm({
       <section className="card-surface space-y-5 p-6">
         <div>
           <h2 className="text-xl font-bold">
-            Informasi Service
+            Informasi Layanan
           </h2>
 
           <p className="mt-1 text-sm text-slate-600">
@@ -145,7 +146,7 @@ export function ServiceForm({
             htmlFor="title"
             className="text-sm font-semibold"
           >
-            Judul service
+            Judul layanan
           </label>
 
           <input
@@ -231,7 +232,7 @@ export function ServiceForm({
           />
 
           <p className="mt-1 text-xs text-slate-500">
-            Phase ini menggunakan plain text.
+            Konten menggunakan teks biasa.
             Jangan masukkan tag HTML.
           </p>
 
@@ -242,25 +243,15 @@ export function ServiceForm({
         </div>
 
         <div>
-          <label
-            htmlFor="coverImage"
-            className="text-sm font-semibold"
-          >
-            Cover image
-          </label>
-
-          <input
-            id="coverImage"
-            type="text"
-            maxLength={255}
-            className="input-text mt-2"
-            placeholder="/images/service.jpg atau https://..."
-            {...register("coverImage")}
+          <MediaPickerField
+            name="coverImage"
+            label="Gambar sampul"
+            module="services"
+            defaultValue={
+              initialData?.coverImage ?? ""
+            }
+            help="Pilih dari koleksi media atau unggah gambar baru."
           />
-
-          <p className="mt-1 text-xs text-slate-500">
-            Upload media akan dibuat pada Phase 6.
-          </p>
 
           <FieldError
             state={state}
@@ -308,13 +299,13 @@ export function ServiceForm({
               {...register("status")}
             >
               <option value="draft">
-                Draft
+                Draf
               </option>
               <option value="published">
-                Published
+                Dipublikasikan
               </option>
               <option value="inactive">
-                Inactive
+                Tidak Aktif
               </option>
             </select>
 
@@ -334,11 +325,11 @@ export function ServiceForm({
 
           <span>
             <span className="block font-semibold">
-              Featured
+              Jadikan Unggulan
             </span>
 
             <span className="text-sm text-slate-500">
-              Tampilkan sebagai service unggulan.
+              Tampilkan sebagai layanan unggulan.
             </span>
           </span>
         </label>
@@ -348,12 +339,12 @@ export function ServiceForm({
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold">
-              FAQ Service
+              FAQ Layanan
             </h2>
 
             <p className="mt-1 text-sm text-slate-600">
-              Pertanyaan dan jawaban pada detail
-              service.
+              Pertanyaan dan jawaban pada halaman
+              detail layanan.
             </p>
           </div>
 
@@ -461,11 +452,11 @@ export function ServiceForm({
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold">
-              CTA Service
+              Tombol Tindakan (CTA)
             </h2>
 
             <p className="mt-1 text-sm text-slate-600">
-              Tombol tindakan pada detail service.
+              Tombol-tombol ajakan bertindak pada halaman detail layanan.
             </p>
           </div>
 
@@ -481,7 +472,7 @@ export function ServiceForm({
               })
             }
           >
-            Tambah CTA
+            Tambah Tombol Tindakan
           </button>
         </div>
 
@@ -509,7 +500,7 @@ export function ServiceForm({
                       ctaFields.remove(index)
                     }
                   >
-                    Hapus CTA
+                    Hapus Tombol
                   </button>
                 </div>
 
@@ -547,7 +538,7 @@ export function ServiceForm({
                         Halaman kontak
                       </option>
                       <option value="url">
-                        URL
+                        Tautan URL
                       </option>
                     </select>
                   </div>
@@ -590,7 +581,7 @@ export function ServiceForm({
                     />
 
                     <span className="text-sm font-semibold">
-                      CTA aktif
+                      Tombol aktif
                     </span>
                   </label>
                 </div>

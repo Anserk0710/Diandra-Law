@@ -7,7 +7,7 @@ import { updateWhatsAppSettingsAction } from "@/features/settings/settings.actio
 import { getAdminSiteSettings } from "@/features/settings/settings.queries";
 
 export const metadata: Metadata = {
-  title: "WhatsApp Settings",
+  title: "Pengaturan WhatsApp",
 };
 
 export default async function WhatsAppSettingsPage() {
@@ -17,8 +17,8 @@ export default async function WhatsAppSettingsPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        title="WhatsApp Settings"
-        description="Kelola nomor dan pesan awal WhatsApp global."
+        title="Pengaturan WhatsApp"
+        description="Kelola nomor dan pesan pembuka WhatsApp yang digunakan di seluruh website."
       />
 
       <SettingsTabs />

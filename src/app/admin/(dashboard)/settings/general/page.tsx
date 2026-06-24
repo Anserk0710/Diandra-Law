@@ -7,7 +7,7 @@ import { updateGeneralSettingsAction } from "@/features/settings/settings.action
 import { getAdminSiteSettings } from "@/features/settings/settings.queries";
 
 export const metadata: Metadata = {
-  title: "General Settings",
+  title: "Pengaturan Umum",
 };
 
 export default async function GeneralSettingsPage() {
@@ -17,9 +17,9 @@ export default async function GeneralSettingsPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        eyebrow="Phase 5"
-        title="General Settings"
-        description="Kelola identitas brand, kontak, alamat, map, dan footer."
+        eyebrow="Pengaturan Website"
+        title="Pengaturan Umum"
+        description="Kelola identitas brand, kontak, alamat, peta, dan teks footer."
       />
 
       <SettingsTabs />

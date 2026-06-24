@@ -10,6 +10,7 @@ import {
   INITIAL_ACTION_STATE,
   type CmsFormAction,
 } from "@/lib/cms/action-state";
+import { MediaPickerField } from "@/features/media/MediaPickerField";
 
 type Props = {
   action: CmsFormAction;
@@ -73,31 +74,39 @@ export function GeneralSettingsForm({
           state={state}
         />
 
-        <InputField
-          label="Logo untuk background terang"
-          name="logoDark"
-          defaultValue={
-            initialData.logoDark
-          }
-          state={state}
-          placeholder="/images/logo-dark.png"
-        />
+        <div>
+          <MediaPickerField
+            name="logoDark"
+            label="Logo untuk background terang"
+            module="pages"
+            defaultValue={
+              initialData.logoDark
+            }
+            help="Logo gelap yang digunakan pada header atau background terang."
+          />
 
-        <InputField
-          label="Logo untuk background gelap"
-          name="logoLight"
-          defaultValue={
-            initialData.logoLight
-          }
-          state={state}
-          placeholder="/images/logo-light.png"
-        />
+          <FieldError
+            state={state}
+            name="logoDark"
+          />
+        </div>
 
-        <p className="text-xs text-slate-500">
-          Upload file baru akan dibuat pada
-          Phase 6. Untuk saat ini gunakan path
-          public atau URL gambar.
-        </p>
+        <div>
+          <MediaPickerField
+            name="logoLight"
+            label="Logo untuk background gelap"
+            module="pages"
+            defaultValue={
+              initialData.logoLight
+            }
+            help="Logo terang yang digunakan pada footer atau background gelap."
+          />
+
+          <FieldError
+            state={state}
+            name="logoLight"
+          />
+        </div>
       </section>
 
       <section className="card-surface space-y-5 p-6">
@@ -109,7 +118,7 @@ export function GeneralSettingsForm({
 
         <div className="grid gap-5 md:grid-cols-2">
           <ColorField
-            label="Primary color"
+            label="Warna utama (primary)"
             name="primaryColor"
             defaultValue={
               initialData.primaryColor
@@ -118,7 +127,7 @@ export function GeneralSettingsForm({
           />
 
           <ColorField
-            label="Secondary color"
+            label="Warna aksen (secondary)"
             name="secondaryColor"
             defaultValue={
               initialData.secondaryColor
@@ -203,7 +212,7 @@ export function GeneralSettingsForm({
         >
           {pending
             ? "Menyimpan..."
-            : "Simpan settings"}
+            : "Simpan Pengaturan"}
         </button>
       </div>
     </form>

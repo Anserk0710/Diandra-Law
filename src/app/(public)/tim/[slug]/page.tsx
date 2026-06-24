@@ -1,4 +1,9 @@
 import { notFound } from "next/navigation";
+import {
+  BriefcaseBusiness,
+  MessageCircle,
+  Scale,
+} from "lucide-react";
 import { PageHero } from "@/components/public/PageHero";
 import {
   getPublishedLawyerBySlug,
@@ -6,7 +11,6 @@ import {
 } from "@/lib/public-site";
 import {
   buildWhatsAppUrl,
-  getInitials,
 } from "@/lib/site-utils";
 
 type LawyerDetailPageProps = {
@@ -37,7 +41,7 @@ export default async function LawyerDetailPage({
 
   return (
     <>
-      <PageHero
+      <PageHero compact
         eyebrow={lawyer.position}
         title={lawyer.name}
         description={lawyer.shortBio}
@@ -46,8 +50,12 @@ export default async function LawyerDetailPage({
             href={whatsappHref}
             target="_blank"
             rel="noreferrer"
-            className="rounded-xl bg-amber-400 px-5 py-3 font-bold text-slate-950"
+            className="btn-primary"
           >
+            <MessageCircle
+              aria-hidden="true"
+              className="h-4 w-4"
+            />
             Jadwalkan Konsultasi
           </a>
         }
@@ -62,16 +70,24 @@ export default async function LawyerDetailPage({
                 <img
                   src={lawyer.photo}
                   alt={lawyer.name}
-                className="h-80 w-full object-cover sm:h-[420px]"
+                  className="h-80 w-full object-cover sm:h-[420px]"
                 />
               ) : (
-                <div className="flex h-80 items-center justify-center bg-gradient-to-br from-slate-800 to-slate-950 text-5xl font-bold text-amber-300 sm:h-[420px] sm:text-6xl">
-                  {getInitials(lawyer.name)}
+                <div className="flex h-80 items-center justify-center bg-[var(--brand)] text-white sm:h-[420px]">
+                  <Scale
+                    aria-hidden="true"
+                    className="h-12 w-12 text-[var(--brand-accent-soft)]"
+                    strokeWidth={1.8}
+                  />
                 </div>
               )}
 
               <div className="p-6">
-                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-amber-700">
+                <p className="inline-flex items-center gap-1.5 text-sm font-bold uppercase text-teal-700">
+                  <BriefcaseBusiness
+                    aria-hidden="true"
+                    className="h-4 w-4"
+                  />
                   Spesialisasi
                 </p>
 
@@ -83,7 +99,7 @@ export default async function LawyerDetailPage({
           </aside>
 
           <article>
-            <h2 className="text-2xl font-bold leading-tight sm:text-3xl">
+            <h2 className="text-2xl font-black leading-tight sm:text-3xl">
               Profil Profesional
             </h2>
 
@@ -91,8 +107,8 @@ export default async function LawyerDetailPage({
               {lawyer.fullBio}
             </div>
 
-            <div className="mt-10 rounded-2xl bg-amber-50 p-5 sm:rounded-3xl sm:p-7">
-              <h3 className="text-xl font-bold">
+            <div className="card-surface mt-10 p-5 sm:p-7">
+              <h3 className="text-xl font-black">
                 Konsultasikan kebutuhan hukum Anda
               </h3>
 
@@ -107,6 +123,10 @@ export default async function LawyerDetailPage({
                 rel="noreferrer"
                 className="btn-primary mt-5"
               >
+                <MessageCircle
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                />
                 Hubungi via WhatsApp
               </a>
             </div>

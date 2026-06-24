@@ -6,15 +6,15 @@ import { LawyerForm } from "@/features/lawyers/LawyerForm";
 import { createLawyerAction } from "@/features/lawyers/lawyer.actions";
 
 export const metadata: Metadata = {
-  title: "Tambah Lawyer",
+  title: "Tambah Anggota Tim",
 };
 
 export default function CreateLawyerPage() {
   return (
     <div className="space-y-6">
       <AdminPageHeader
-        title="Tambah Lawyer"
-        description="Buat profil lawyer baru."
+        title="Tambah Anggota Tim"
+        description="Tambahkan profil anggota tim baru ke dalam website."
         action={
           <Link
             href="/admin/lawyers"
@@ -27,7 +27,7 @@ export default function CreateLawyerPage() {
 
       <LawyerForm
         action={createLawyerAction}
-        submitLabel="Simpan lawyer"
+        submitLabel="Simpan Profil"
       />
     </div>
   );

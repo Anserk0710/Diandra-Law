@@ -30,11 +30,11 @@ export default async function AdminLoginPage() {
           </p>
 
           <h1 className="mt-3 text-3xl font-bold">
-            CMS Admin
+            Panel Admin
           </h1>
 
           <p className="mt-2 text-sm text-slate-300">
-            Masuk menggunakan akun admin yang aktif.
+            Masuk menggunakan akun admin Anda.
           </p>
         </div>
 
