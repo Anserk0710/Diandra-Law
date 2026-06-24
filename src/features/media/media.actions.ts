@@ -1,26 +1,14 @@
 "use server";
 
-import { randomUUID } from "node:crypto";
-import {
-    rename,
-    unlink,
-} from "node:fs/promises";
-
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { parseEntityId } from "@/lib/cms/cms-utils";
 import { prisma } from "@/lib/db/prisma";
-import { resolveStoredMediaPath } from "@/lib/upload/media-storage";
+import { deleteImageFromCloudinary } from "@/lib/upload/media-storage";
 
 import { findMediaUsage } from "./media-usage";
-
-function isNodeError(
-    error: unknown,
-): error is NodeJS.ErrnoException {
-    return error instanceof Error;
-}
 
 export async function deleteMediaAction(
     mediaId: string,
@@ -28,137 +16,50 @@ export async function deleteMediaAction(
 ) {
     await requireAdmin();
 
-    const id =
-        parseEntityId(mediaId);
+    const id = parseEntityId(mediaId);
 
     if (!id) {
-        redirect(
-            "/admin/media?error=invalid-id",
-        );
+        redirect("/admin/media?error=invalid-id");
     }
 
-    const media =
-        await prisma.mediaUpload.findUnique({
-            where: {
-                id,
-            },
-        });
+    const media = await prisma.mediaUpload.findUnique({
+        where: { id },
+    });
 
     if (!media) {
-        redirect(
-            "/admin/media?error=not-found",
-        );
+        redirect("/admin/media?error=not-found");
     }
 
-    const usage =
-        await findMediaUsage(
-            media.fileUrl,
-        );
+    const usage = await findMediaUsage(media.fileUrl);
 
     if (usage.length > 0) {
-        const usageSummary =
-            usage
-                .slice(0, 5)
-                .join(", ");
-
+        const usageSummary = usage.slice(0, 5).join(", ");
         redirect(
-            `/admin/media?error=in-use&usage=${encodeURIComponent(
-                usageSummary,
-            )}`,
+            `/admin/media?error=in-use&usage=${encodeURIComponent(usageSummary)}`,
         );
     }
 
-    let absolutePath: string;
-
+    // Hapus record dari database terlebih dahulu
     try {
-        absolutePath =
-            resolveStoredMediaPath(
-                media.filePath,
-            );
-    } catch (error) {
-        console.error(
-            "Invalid media path:",
-            error,
-        );
-
-        redirect(
-            "/admin/media?error=invalid-path",
-        );
-    }
-
-    const trashPath =
-        `${absolutePath}.delete-${randomUUID()}`;
-
-    let fileMovedToTrash = false;
-
-    try {
-        await rename(
-            absolutePath,
-            trashPath,
-        );
-
-        fileMovedToTrash = true;
-    } catch (error) {
-        if (
-            !isNodeError(error) ||
-            error.code !== "ENOENT"
-        ) {
-            console.error(
-                "Gagal memindahkan media sebelum delete:",
-                error,
-            );
-
-            redirect(
-                "/admin/media?error=filesystem",
-            );
-        }
-    }
-
-    try {
-        await prisma.mediaUpload.delete({
-            where: {
-                id,
-            },
-        });
+        await prisma.mediaUpload.delete({ where: { id } });
     } catch (databaseError) {
-        console.error(
-            "Gagal menghapus metadata media:",
-            databaseError,
-        );
-
-        if (fileMovedToTrash) {
-            try {
-                await rename(
-                    trashPath,
-                    absolutePath,
-                );
-            } catch (restoreError) {
-                console.error(
-                    "Gagal mengembalikan file setelah database error:",
-                    restoreError,
-                );
-            }
-        }
-
-        redirect(
-            "/admin/media?error=database",
-        );
+        console.error("Gagal menghapus metadata media:", databaseError);
+        redirect("/admin/media?error=database");
     }
 
-    if (fileMovedToTrash) {
-        try {
-            await unlink(trashPath);
-        } catch (cleanupError) {
-            console.error(
-                "Metadata terhapus tetapi file trash gagal dibersihkan:",
-                cleanupError,
-            );
-        }
+    // Hapus file dari Cloudinary setelah DB berhasil dihapus
+    // filePath menyimpan Cloudinary public_id
+    try {
+        await deleteImageFromCloudinary(media.filePath);
+    } catch (cloudinaryError) {
+        // File sudah tidak ada di DB, log saja error Cloudinary
+        // tapi jangan gagalkan operasi karena data sudah konsisten
+        console.error(
+            "Metadata terhapus tetapi file Cloudinary gagal dihapus:",
+            cloudinaryError,
+        );
     }
 
     revalidatePath("/admin/media");
-
-    redirect(
-        "/admin/media?deleted=1",
-    );
+    redirect("/admin/media?deleted=1");
 }

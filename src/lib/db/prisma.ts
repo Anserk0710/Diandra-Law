@@ -1,10 +1,19 @@
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "@/generated/prisma";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const databaseUrl = process.env.DATABASE_URL;
+function createPrismaClient() {
+    const connectionString = process.env.DATABASE_URL;
 
-if (!databaseUrl) {
-    throw new Error("DATABASE_URL is not set");
+    if (!connectionString) {
+        throw new Error("DATABASE_URL is not set");
+    }
+
+    const adapter = new PrismaPg({ connectionString });
+
+    return new PrismaClient({
+        adapter,
+        log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
+    });
 }
 
 const globalForPrisma = globalThis as unknown as {
@@ -12,11 +21,7 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 export const prisma =
-    globalForPrisma.prisma ??
-    new PrismaClient({
-        adapter: new PrismaMariaDb(databaseUrl),
-        log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-    });
+    globalForPrisma.prisma ?? createPrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
     globalForPrisma.prisma = prisma;

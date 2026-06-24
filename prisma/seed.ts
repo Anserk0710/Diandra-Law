@@ -1,5 +1,7 @@
+import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+
+import { PrismaPg } from "@prisma/adapter-pg";
 import {
   ArticleStatus,
   ContentStatus,
@@ -8,15 +10,8 @@ import {
   PrismaClient,
 } from "../src/generated/prisma";
 
-const databaseUrl = process.env.DATABASE_URL;
-
-if (!databaseUrl) {
-    throw new Error("DATABASE_URL is not set");
-}
-
-const prisma = new PrismaClient({
-    adapter: new PrismaMariaDb(databaseUrl),
-});
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL ?? "" });
+const prisma = new PrismaClient({ adapter });
 
 async function seedAdmin() {
   const email = process.env.SEED_ADMIN_EMAIL?.trim().toLowerCase();

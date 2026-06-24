@@ -1,5 +1,3 @@
-import path from "node:path";
-
 import {
     config as loadEnv,
 } from "dotenv";
@@ -90,6 +88,7 @@ function validateUrl(
     }
 }
 
+// DATABASE
 const databaseUrl =
     requireEnvironmentValue(
         "DATABASE_URL",
@@ -99,10 +98,11 @@ validateUrl(
     "DATABASE_URL",
     databaseUrl,
     {
-        protocols: ["mysql:"],
+        protocols: ["postgresql:", "postgres:"],
     },
 );
 
+// AUTH
 const authSecret =
     requireEnvironmentValue(
         "AUTH_SECRET",
@@ -117,6 +117,7 @@ if (
     );
 }
 
+// SITE URL
 const siteUrl =
     requireEnvironmentValue(
         "NEXT_PUBLIC_SITE_URL",
@@ -137,52 +138,12 @@ validateUrl(
     },
 );
 
-const uploadRoot =
-    readEnvironmentValue(
-        "MEDIA_UPLOAD_ROOT",
-    );
+// CLOUDINARY
+requireEnvironmentValue("CLOUDINARY_CLOUD_NAME");
+requireEnvironmentValue("CLOUDINARY_API_KEY");
+requireEnvironmentValue("CLOUDINARY_API_SECRET");
 
-if (
-    nodeEnv === "production" &&
-    !uploadRoot
-) {
-    errors.push(
-        "MEDIA_UPLOAD_ROOT wajib diisi pada production.",
-    );
-}
-
-if (
-    nodeEnv === "production" &&
-    uploadRoot &&
-    !path.isAbsolute(uploadRoot)
-) {
-    errors.push(
-        "MEDIA_UPLOAD_ROOT production harus berupa absolute path.",
-    );
-}
-
-const mediaPublicBaseUrl =
-    readEnvironmentValue(
-        "MEDIA_PUBLIC_BASE_URL",
-    );
-
-if (
-    mediaPublicBaseUrl &&
-    !mediaPublicBaseUrl.startsWith(
-        "/",
-    ) &&
-    !mediaPublicBaseUrl.startsWith(
-        "http://",
-    ) &&
-    !mediaPublicBaseUrl.startsWith(
-        "https://",
-    )
-) {
-    errors.push(
-        "MEDIA_PUBLIC_BASE_URL harus diawali / atau berupa URL http/https.",
-    );
-}
-
+// MEDIA UPLOAD SIZE
 const maximumUploadSize =
     Number(
         readEnvironmentValue(

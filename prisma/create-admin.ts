@@ -1,18 +1,13 @@
 import "dotenv/config";
 
 import bcrypt from "bcryptjs";
-import {
-    PrismaMariaDb,
-} from "@prisma/adapter-mariadb";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 import {
     PrismaClient,
 } from "../src/generated/prisma";
 
-const databaseUrl =
-    process.env.DATABASE_URL;
-
-if (!databaseUrl) {
+if (!process.env.DATABASE_URL) {
     throw new Error(
         "DATABASE_URL belum diisi.",
     );
@@ -65,13 +60,8 @@ if (fullName.length > 191) {
     );
 }
 
-const prisma =
-    new PrismaClient({
-        adapter:
-            new PrismaMariaDb(
-                databaseUrl,
-            ),
-    });
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL ?? "" });
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
     const passwordHash =

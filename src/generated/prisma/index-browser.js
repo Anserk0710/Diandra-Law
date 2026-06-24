@@ -285,115 +285,20 @@ exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.AdminOrderByRelevanceFieldEnum = {
-  email: 'email',
-  passwordHash: 'passwordHash',
-  fullName: 'fullName'
 };
 
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
-exports.Prisma.PageOrderByRelevanceFieldEnum = {
-  pageKey: 'pageKey',
-  title: 'title'
-};
-
-exports.Prisma.ServiceOrderByRelevanceFieldEnum = {
-  title: 'title',
-  slug: 'slug',
-  summary: 'summary',
-  content: 'content',
-  coverImage: 'coverImage'
-};
-
-exports.Prisma.ServiceFaqOrderByRelevanceFieldEnum = {
-  question: 'question',
-  answer: 'answer'
-};
-
-exports.Prisma.ServiceCtaOrderByRelevanceFieldEnum = {
-  label: 'label',
-  link: 'link'
-};
-
-exports.Prisma.LawyerOrderByRelevanceFieldEnum = {
-  name: 'name',
-  slug: 'slug',
-  photo: 'photo',
-  position: 'position',
-  shortBio: 'shortBio',
-  fullBio: 'fullBio',
-  specialty: 'specialty'
-};
-
-exports.Prisma.ArticleCategoryOrderByRelevanceFieldEnum = {
-  name: 'name',
-  slug: 'slug'
-};
-
-exports.Prisma.ArticleOrderByRelevanceFieldEnum = {
-  title: 'title',
-  slug: 'slug',
-  excerpt: 'excerpt',
-  thumbnail: 'thumbnail',
-  content: 'content'
-};
-
-exports.Prisma.ClientOrderByRelevanceFieldEnum = {
-  name: 'name',
-  slug: 'slug',
-  logo: 'logo',
-  shortDescription: 'shortDescription',
-  category: 'category'
-};
-
-exports.Prisma.SiteSettingOrderByRelevanceFieldEnum = {
-  siteName: 'siteName',
-  siteTagline: 'siteTagline',
-  logoLight: 'logoLight',
-  logoDark: 'logoDark',
-  primaryColor: 'primaryColor',
-  secondaryColor: 'secondaryColor',
-  whatsappNumber: 'whatsappNumber',
-  whatsappMessage: 'whatsappMessage',
-  email: 'email',
-  phone: 'phone',
-  officeAddress: 'officeAddress',
-  mapEmbedUrl: 'mapEmbedUrl',
-  footerText: 'footerText'
-};
-
-exports.Prisma.SeoMetaOrderByRelevanceFieldEnum = {
-  entityType: 'entityType',
-  metaTitle: 'metaTitle',
-  metaDescription: 'metaDescription',
-  ogImage: 'ogImage',
-  canonicalUrl: 'canonicalUrl',
-  robots: 'robots',
-  schemaType: 'schemaType'
-};
-
-exports.Prisma.MediaUploadOrderByRelevanceFieldEnum = {
-  module: 'module',
-  originalName: 'originalName',
-  fileName: 'fileName',
-  filePath: 'filePath',
-  fileUrl: 'fileUrl',
-  mimeType: 'mimeType'
 };
 exports.PageStatus = exports.$Enums.PageStatus = {
   draft: 'draft',

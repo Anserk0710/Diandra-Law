@@ -55,6 +55,12 @@ const nextConfig: NextConfig = {
       "image/avif",
       "image/webp",
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 
   async headers() {
